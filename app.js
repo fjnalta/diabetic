@@ -43,7 +43,7 @@ app.get('/result/:id', (req, res) => {
     // render results
     res.render('results', {
         cgm : JSON.stringify(cgmData),
-        alarm : alarmData
+        alarm : JSON.stringify(alarmData)
     });
 });
 
