@@ -1,0 +1,23 @@
+<%- include ('partials/header.ejs') %>
+
+<script src="handleUpload.js"></script>
+
+<form>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="uploadFile">
+        <label for="uploadFile" class="custom-file-label" >Choose file</label>
+    </div>
+</form>
+
+<button type="button" class="btn btn-primary float-right" id="buttonUploadData"
+        onclick="uploadData();">Upload
+</button>
+
+<script>
+    $(".custom-file-input").on("change", function() {
+        let fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+<%- include ('partials/footer.ejs') %>
