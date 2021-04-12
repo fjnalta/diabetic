@@ -1,23 +1,15 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
 const multer = require('multer');
 const upload = multer({ dest: 'public/uploads/' });
 
 const config = require('./lib/config.json');
 
-const bodyParser = require('body-parser');
-const path = require('path');
-
-const app = express();
-
 const xlsxParser = new (require('./lib/tools/xlsxParser'));
 
-// use EJS as view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// reverse proxy configuration
-app.set('trust proxy', '127.0.0.1');
+const app = express();
 
 // configure webserver
 app.use(bodyParser.json());
@@ -27,9 +19,18 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, config.webContentDir)));
 app.use('/node_modules', express.static('node_modules'));
 
+// use EJS as view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// reverse proxy configuration
+app.set('trust proxy', '127.0.0.1');
+
 // set public router
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {
+        runtime : config.runtime
+    });
 });
 
 app.get('/result/:id', (req, res) => {
@@ -38,11 +39,16 @@ app.get('/result/:id', (req, res) => {
     let alarmData = xlsxParser.parseAlertData(req.params.id);
 
     // delete cached file
-    xlsxParser.cleanupData(req.params.id);
+    //xlsxParser.cleanupData(req.params.id);
+
+    console.log(cgmData);
 
     // render results
     res.render('results', {
-        cgm : JSON.stringify(cgmData),
+        runtime : config.runtime,
+        name : cgmData.name,
+        timespan : cgmData.timespan,
+        cgm : JSON.stringify(cgmData.content),
         alarm : JSON.stringify(alarmData)
     });
 });

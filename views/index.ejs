@@ -2,16 +2,30 @@
 
 <script src="handleUpload.js"></script>
 
-<form>
-    <div class="custom-file">
-        <input type="file" class="custom-file-input" id="uploadFile">
-        <label for="uploadFile" class="custom-file-label" >Choose file</label>
-    </div>
-</form>
 
-<button type="button" class="btn btn-primary float-right" id="buttonUploadData"
-        onclick="uploadData();">Upload
-</button>
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="text-center">Diabetes Tracker</h1>
+
+            <form>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="uploadFile">
+                    <label for="uploadFile" class="custom-file-label" >Choose file</label>
+                </div>
+            </form>
+
+            <br>
+
+            <button type="button" class="btn btn-primary float-right" id="buttonUploadData"
+                    onclick="uploadData();">Upload
+            </button>
+        </div>
+    </div>
+    <br>
+</div>
+
 
 <script>
     $(".custom-file-input").on("change", function() {
@@ -20,4 +34,5 @@
     });
 </script>
 
+<%- include ('partials/bottom.ejs') %>
 <%- include ('partials/footer.ejs') %>

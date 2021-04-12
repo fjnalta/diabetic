@@ -1,9 +1,24 @@
 <%- include ('partials/header.ejs') %>
 
-<h1>CGM</h1>
-<%= cgm %>
-<br><br><br><br><br><br>
-<h1>ALARMS</h1>
-<%= alarm %>
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="text-center">General</h1>
+            <p>
+                Name: <%= name %>
+                <br>
+                Data available from <%= timespan.from %> until <%= timespan.until %>
+            </p>
+            <h1 class="text-center">CGM</h1>
+            <%- include ('graphs/cgm.ejs') %>
+            <br>
+            <h1 class="text-center">Alarms</h1>
+            <%= alarm %>
+        </div>
+    </div>
+    <br>
+</div>
 
+<%- include ('partials/bottom.ejs') %>
 <%- include ('partials/footer.ejs') %>

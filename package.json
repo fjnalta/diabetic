@@ -28,6 +28,7 @@
     "express-session": "^1.17.1",
     "jquery": "^3.6.0",
     "multer": "^1.4.2",
+    "pikaday-time": "^1.6.1",
     "popper.js": "^1.16.1",
     "xlsx": "^0.16.9"
   }

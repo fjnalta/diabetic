@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <!-- General Settings -->
-    <title>ezlife.eu - account panel</title>
+    <title>ezlife.eu - Diabetes Tracker</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,9 +12,8 @@
     <!-- Import Font -->
     <link href='https://fonts.googleapis.com/css?family=Nunito:600' rel='stylesheet' type='text/css'>
 
-    <!-- Import main stylesheet
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
-    -->
+    <!-- Import main stylesheet -->
+    <link href="/style.css" rel="stylesheet" type="text/css">
 
     <!-- Import Glyphicons -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -24,10 +23,17 @@
     <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 
+    <!-- Import chart.js -->
+    <script src="/node_modules/chart.js/dist/Chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="/node_modules/chart.js/dist/Chart.css">
+
     <!-- Google ReCaptcha
     <script src="https://www.google.com/recaptcha/api.js?render=6LcRJusUAAAAAPNYUKeKTunJqjeUdzDFNPsFjWnS"></script>
     -->
 </head>
 <body>
+
+<!-- include top navigation -->
+<%- include ('navigation.ejs') %>
 
 <br>
