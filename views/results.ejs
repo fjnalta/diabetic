@@ -1,20 +1,32 @@
 <%- include ('partials/header.ejs') %>
 
+<!-- Include Datepicker -->
+<script src="/node_modules/pikaday-time/pikaday.js"></script>
+<link rel="stylesheet" type="text/css" href="/node_modules/pikaday-time/css/pikaday.css">
+
+<!-- Include additional js -->
+<script src="/js/cgmChart.js"></script>
+<script src="/js/datePicker.js"></script>
+
 <div class="container">
     <br>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col">
             <h1 class="text-center">General</h1>
-            <p>
-                Name: <%= name %>
-                <br>
-                Data available from <%= timespan.from %> until <%= timespan.until %>
-            </p>
+            <%- include ('results/general.ejs') %>
+            <%- include ('results/pumpSettings.ejs') %>
+            <br>
             <h1 class="text-center">CGM</h1>
-            <%- include ('graphs/cgm.ejs') %>
+            <%- include ('results/cgm.ejs') %>
+            <br>
+            <h2 class="text-center">Create Custom CGM Chart</h2>
+            <%- include ('results/customCgm.ejs') %>
+            <br>
+            <h2 class="text-center">CGM Statistics</h2>
             <br>
             <h1 class="text-center">Alarms</h1>
-            <%= alarm %>
+            <!-- <%= alarm %> -->
+            <br>
         </div>
     </div>
     <br>

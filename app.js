@@ -8,6 +8,7 @@ const upload = multer({ dest: 'public/uploads/' });
 const config = require('./lib/config.json');
 
 const xlsxParser = new (require('./lib/tools/xlsxParser'));
+const cgmHandler = new (require('./lib/tools/cgmHandler'));
 
 const app = express();
 
@@ -34,22 +35,47 @@ app.get('/', (req, res) => {
 });
 
 app.get('/result/:id', (req, res) => {
-    // parse data
+    // parse XLS data
     let cgmData = xlsxParser.parseCgmData(req.params.id);
     let alarmData = xlsxParser.parseAlertData(req.params.id);
+    let pumpData = xlsxParser.parsePumpSettings(req.params.id);
 
     // delete cached file
     //xlsxParser.cleanupData(req.params.id);
 
-    console.log(cgmData);
+    let cgm = {};
+    let glucoseMinMax = {
+        min : [],
+        max : []
+    };
+
+    // setup CGM for frontend
+    cgm.all = cgmHandler.getData(cgmData.content, 0);
+    cgm.lastDay = cgmHandler.getData(cgmData.content, 1);
+    cgm.lastWeek = cgmHandler.getData(cgmData.content, 2);
+    cgm.lastMonth = cgmHandler.getData(cgmData.content, 3);
+
+    // setup variable for desired glucose values
+    for(let i=0;i<pumpData.length;i++) {
+        if(pumpData[i].description === 'Warngrenzwert niedriger BZ') {
+            glucoseMinMax.min[0] = pumpData[i].value.split(" ")[0];
+        }
+        if(pumpData[i].description === 'Warngreznwert hoher BZ') {
+            glucoseMinMax.max[0] = pumpData[i].value.split(" ")[0];
+        }
+    }
+
+    //console.log(glucoseMinMax);
 
     // render results
     res.render('results', {
         runtime : config.runtime,
         name : cgmData.name,
         timespan : cgmData.timespan,
-        cgm : JSON.stringify(cgmData.content),
-        alarm : JSON.stringify(alarmData)
+        cgm : JSON.stringify(cgm),
+        alarm : JSON.stringify(alarmData),
+        pumpData : pumpData,
+        glucoseMinMax : JSON.stringify(glucoseMinMax)
     });
 });
 

@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col">
+        <!-- Tabs -->
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active"
+                                id="pills-all-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-all"
+                                type="button"
+                                role="tab"
+                                aria-controls="pills-all"
+                                aria-selected="true">
+                            All
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"
+                                id="pills-1day-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-1day"
+                                type="button"
+                                role="tab"
+                                aria-controls="pills-1day"
+                                aria-selected="false">
+                            Last Day
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"
+                                id="pills-7days-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-1week"
+                                type="button"
+                                role="tab"
+                                aria-controls="pills-1week"
+                                aria-selected="false">
+                            Last Week
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"
+                                id="pills-1week-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-1month"
+                                type="button"
+                                role="tab"
+                                aria-controls="pills-1month"
+                                aria-selected="false">
+                            Last Month
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tab content -->
+        <div class="row">
+            <div class="col">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <canvas id="cgmChart-all"></canvas>
+                        <!-- All Chart -->
+                        <script>
+                            createCGMChart((<%- cgm %>.all), '#cgmChart-all', (<%- glucoseMinMax %>));
+                        </script>
+                    </div>
+
+                    <!-- Last Day Chart -->
+                    <div class="tab-pane fade" id="pills-1day" role="tabpanel" aria-labelledby="pills-1month-tab">
+                        <canvas id="cgmChart-1day"></canvas>
+                        <script>
+                            createCGMChart((<%- cgm %>.lastDay), '#cgmChart-1day', (<%- glucoseMinMax %>));
+                        </script>
+                    </div>
+
+                    <!-- Last Week Chart -->
+                    <div class="tab-pane fade" id="pills-1week" role="tabpanel" aria-labelledby="pills-7days-tab">
+                        <canvas id="cgmChart-1week"></canvas>
+                        <script>
+                            createCGMChart((<%- cgm %>.lastWeek), '#cgmChart-1week', (<%- glucoseMinMax %>));
+                        </script>
+                    </div>
+
+                    <!-- Last Month Chart -->
+                    <div class="tab-pane fade" id="pills-1month" role="tabpanel" aria-labelledby="pills-1month-tab">
+                        <canvas id="cgmChart-1month"></canvas>
+                        <script>
+                            createCGMChart((<%- cgm %>.lastMonth), '#cgmChart-1month', (<%- glucoseMinMax %>));
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

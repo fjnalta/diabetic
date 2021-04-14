@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col">
+        <p>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePumpSettings" aria-expanded="false" aria-controls="collapsePumpSettings">
+                Show Pump Settings
+            </button>
+        </p>
+
+        <div class="collapse" id="collapsePumpSettings">
+            <div class="card card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Setting</th>
+                        <th scope="col">Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for(let i=0;i<pumpData.length ; i++) { %>
+                        <tr>
+                            <th scope="row"><%= i %></th>
+                            <td><%= pumpData[i].description %></td>
+                            <td><%= pumpData[i].value %></td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
