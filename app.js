@@ -9,6 +9,7 @@ const config = require('./lib/config.json');
 
 const xlsxParser = new (require('./lib/tools/xlsxParser'));
 const cgmHandler = new (require('./lib/tools/cgmHandler'));
+const statisticsHandler = new (require('./lib/tools/statisticsHandler'));
 
 const app = express();
 
@@ -65,7 +66,12 @@ app.get('/result/:id', (req, res) => {
         }
     }
 
-    //console.log(glucoseMinMax);
+    // setup statistics for frontend
+    let stats = {};
+    stats.targetRangeAll = statisticsHandler.calculateTargetRangeData(cgm.all.data, glucoseMinMax);
+    stats.targetRangeDay = statisticsHandler.calculateTargetRangeData(cgm.lastDay.data, glucoseMinMax);
+    stats.targetRangeWeek = statisticsHandler.calculateTargetRangeData(cgm.lastWeek.data, glucoseMinMax);
+    stats.targetRangeMonth = statisticsHandler.calculateTargetRangeData(cgm.lastMonth.data, glucoseMinMax);
 
     // render results
     res.render('results', {
@@ -75,12 +81,12 @@ app.get('/result/:id', (req, res) => {
         cgm : JSON.stringify(cgm),
         alarm : JSON.stringify(alarmData),
         pumpData : pumpData,
-        glucoseMinMax : JSON.stringify(glucoseMinMax)
+        glucoseMinMax : JSON.stringify(glucoseMinMax),
+        statistics : JSON.stringify(stats)
     });
 });
 
 app.post('/upload', upload.single('data'), function (req, res) {
-    //console.log(req.file);
     if (req.file) {
         res.send(req.file.filename);
     } else {

@@ -56,7 +56,6 @@ function createCGMChart(data, chart, target) {
             }
         }
     });
-
     charts.push(myChart);
 }
 

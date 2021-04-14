@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-3">
+        <h3 class="text-center">All Data</h3>
+        <canvas id="pie-target-range-all"></canvas>
+        <script>createTargetRangePie((<%- statistics %>.targetRangeAll), '#pie-target-range-all');</script>
+        <div id="pie-target-range-all-percentage"></div>
+        <script>calculatePercentages((<%- statistics %>.targetRangeAll), '#pie-target-range-all-percentage');</script>
+    </div>
+    <div class="col-3">
+        <h3 class="text-center">Last Day</h3>
+        <canvas id="pie-target-range-day"></canvas>
+        <script>createTargetRangePie((<%- statistics %>.targetRangeDay), '#pie-target-range-day');</script>
+        <div id="pie-target-range-day-percentage"></div>
+        <script>calculatePercentages((<%- statistics %>.targetRangeDay), '#pie-target-range-day-percentage');</script>
+    </div>
+    <div class="col-3">
+        <h3 class="text-center">Last Week</h3>
+        <canvas id="pie-target-range-week"></canvas>
+        <script>createTargetRangePie((<%- statistics %>.targetRangeWeek), '#pie-target-range-week');</script>
+        <div id="pie-target-range-week-percentage"></div>
+        <script>calculatePercentages((<%- statistics %>.targetRangeWeek), '#pie-target-range-week-percentage');</script>
+    </div>
+    <div class="col-3">
+        <h3 class="text-center">Last Month</h3>
+        <canvas id="pie-target-range-month"></canvas>
+        <script>createTargetRangePie((<%- statistics %>.targetRangeMonth), '#pie-target-range-month');</script>
+        <div id="pie-target-range-month-percentage"></div>
+        <script>calculatePercentages((<%- statistics %>.targetRangeMonth), '#pie-target-range-month-percentage');</script>
+
+    </div>
+</div>
