@@ -2,12 +2,14 @@
     Logic for general CGM Charts
  */
 
+const charts = [];
+
 /**
  * @param data - CGM data
  * @param chart - HTML reference
  */
 function createCGMChart(data, chart, target) {
-    new Chart($(chart)[0].getContext('2d'), {
+    let myChart = new Chart($(chart)[0].getContext('2d'), {
         type: 'line',
         data: {
             labels: data.labels,
@@ -20,31 +22,15 @@ function createCGMChart(data, chart, target) {
             }]
         },
         options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 350
+                }
+            },
             plugins: {
                 annotation: {
                     annotations: {
-                        line1: {
-                            type: 'line',
-                            scaleID: 'y',
-                            value: target.min,
-                            borderColor: 'black',
-                            borderWidth: 3,
-                            label: {
-                                content: target.min,
-                                enabled: true
-                            }
-                        },
-                        line2: {
-                            type: 'line',
-                            scaleID: 'y',
-                            value: target.max,
-                            borderColor: 'black',
-                            borderWidth: 3,
-                            label: {
-                                content: target.max,
-                                enabled: true
-                            }
-                        },
                         box1: {
                             drawTime: 'beforeDraw',
                             type: 'box',
@@ -53,17 +39,31 @@ function createCGMChart(data, chart, target) {
                             backgroundColor: 'rgba(205, 197, 197, 0.5)'
                         }
                     }
+                },
+                zoom: {
+                   pan: {
+                       enabled: true,
+                       mode: 'x'
+                   },
+                   zoom: {
+                       enabled: true,
+                       mode: 'x',
+                       speed: 1,
+                       threshold: 0,
+                       sensitivity: 0
+                   }
                 }
             }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
         }
     });
+
+    charts.push(myChart);
+}
+
+function resetZoom() {
+    for(let i=0;i<charts.length;i++) {
+        charts[i].resetZoom();
+    }
 }
 
 /*
